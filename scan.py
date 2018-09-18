@@ -71,12 +71,11 @@ def get_fuzz_url(alllinks, basedomain):
 		if protocol[:4] != 'http' or '..' in path:
 			continue
 
-		if length == 2:
-			url0 = protocol + basedomain + '/'
-			if url0 not in dirs:
-				dirs.append(url0)
+		url0 = protocol + basedomain + '/'
+		if url0 not in dirs:
+			dirs.append(url0)
 			
-		if fuzz_deep == 1 and length >= 3:
+		if fuzz_deep >= 1 and length >= 3:
 			url1 = protocol + basedomain + '/' + p[1] + '/'
 			if '?' not in url1 and url1 not in dirs:
 				dirs.append(url1)
