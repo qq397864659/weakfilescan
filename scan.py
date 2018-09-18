@@ -9,6 +9,7 @@
 """
 
 import os
+import re
 import sys
 import json
 import Queue
@@ -132,7 +133,7 @@ class bruteWorker(threading.Thread):
 			while not self.queue.empty():
 				sub = self.queue.get_nowait()
 				ret = http_request_get(sub)	
-				if ret.status_code in exclude_status:
+				if ret.status_code in exclude_status and not re.findall(not_find_reg, ret.text):
 					print sub
 					self.count += 1
 					if self.count >= result_cnt:
